@@ -14,7 +14,7 @@ var TWEEN = TWEEN || ( function () {
 	var i, tl, interval, time, fps = 60, autostart = false, tweens = [], num_tweens;
 
 	return {
-	
+
 		setFPS: function ( f ) {
 
 			fps = f || 60;
@@ -22,11 +22,11 @@ var TWEEN = TWEEN || ( function () {
 		},
 
 		start: function ( f ) {
-			
+
 			if( arguments.length != 0 ) {
 				this.setFPS( f );
 			}
-			
+
 			interval = setInterval( this.update, 1000 / fps );
 
 		},
@@ -40,7 +40,7 @@ var TWEEN = TWEEN || ( function () {
 		setAutostart: function ( value ) {
 
 			autostart = value;
-			
+
 			if(autostart && !interval) {
 				this.start();
 			}
@@ -371,7 +371,7 @@ TWEEN.Easing.Quintic.EaseInOut = function ( k ) {
 
 };
 
-// 
+//
 
 TWEEN.Easing.Sinusoidal.EaseIn = function ( k ) {
 
@@ -414,7 +414,7 @@ TWEEN.Easing.Exponential.EaseInOut = function ( k ) {
 
 };
 
-// 
+//
 
 TWEEN.Easing.Circular.EaseIn = function ( k ) {
 
@@ -492,7 +492,7 @@ TWEEN.Easing.Back.EaseInOut = function( k ) {
 
 };
 
-// 
+//
 
 TWEEN.Easing.Bounce.EaseIn = function( k ) {
 

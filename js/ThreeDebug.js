@@ -23,20 +23,20 @@ if ( ! self.Int32Array ) {
     var vendors = ['ms', 'moz', 'webkit', 'o'];
     for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
         window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] 
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
                                    || window[vendors[x]+'RequestCancelAnimationFrame'];
     }
- 
+
     if (!window.requestAnimationFrame)
         window.requestAnimationFrame = function(callback, element) {
             var currTime = new Date().getTime();
             var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-            var id = window.setTimeout(function() { callback(currTime + timeToCall); }, 
+            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
               timeToCall);
             lastTime = currTime + timeToCall;
             return id;
         };
- 
+
     if (!window.cancelAnimationFrame)
         window.cancelAnimationFrame = function(id) {
             clearTimeout(id);
@@ -4522,7 +4522,7 @@ THREE.PerspectiveCamera.prototype.updateProjectionMatrix = function () {
  * @author mr.doob / http://mrdoob.com/
  * @author alteredq / http://alteredqualia.com/
  */
- 
+
 THREE.Light = function ( hex ) {
 
 	THREE.Object3D.call( this );
@@ -4545,7 +4545,7 @@ THREE.AmbientLight = function ( hex ) {
 };
 
 THREE.AmbientLight.prototype = new THREE.Light();
-THREE.AmbientLight.prototype.constructor = THREE.AmbientLight; 
+THREE.AmbientLight.prototype.constructor = THREE.AmbientLight;
 /**
  * @author mr.doob / http://mrdoob.com/
  * @author alteredq / http://alteredqualia.com/
@@ -4954,13 +4954,13 @@ THREE.MeshPhongMaterial.prototype.constructor = THREE.MeshPhongMaterial;
  *
  * parameters = {
  *  opacity: <float>,
- 
+
  *  blending: THREE.NormalBlending,
  *  depthTest: <bool>,
- 
+
  *  wireframe: <boolean>,
  *  wireframeLinewidth: <float>
- * } 
+ * }
  */
 
 THREE.MeshDepthMaterial = function ( parameters ) {
@@ -4985,11 +4985,11 @@ THREE.MeshDepthMaterial.prototype.constructor = THREE.MeshDepthMaterial;
  *
  * parameters = {
  *  opacity: <float>,
- 
+
  *  shading: THREE.FlatShading,
  *  blending: THREE.NormalBlending,
  *  depthTest: <bool>,
- 
+
  *  wireframe: <boolean>,
  *  wireframeLinewidth: <float>
  * }
@@ -6310,10 +6310,10 @@ THREE.CanvasRenderer = function ( parameters ) {
 		_elements = _renderData.elements;
 		_lights = _renderData.lights;
 
-		
+
 		_context.fillStyle = 'rgba( 0, 255, 255, 0.5 )';
 		_context.fillRect( _clipRect.getX(), _clipRect.getY(), _clipRect.getWidth(), _clipRect.getHeight() );
-		
+
 
 		_enableLighting = _lights.length > 0;
 
@@ -6431,11 +6431,11 @@ THREE.CanvasRenderer = function ( parameters ) {
 
 		}
 
-		
+
 		_context.lineWidth = 1;
 		_context.strokeStyle = 'rgba( 255, 0, 0, 0.5 )';
 		_context.strokeRect( _clearRect.getX(), _clearRect.getY(), _clearRect.getWidth(), _clearRect.getHeight() );
-		
+
 
 		_context.setTransform( 1, 0, 0, 1, 0, 0 );
 
@@ -6573,7 +6573,7 @@ THREE.CanvasRenderer = function ( parameters ) {
 
 				}
 
-				
+
 				_context.beginPath();
 				_context.moveTo( v1.x - 10, v1.y );
 				_context.lineTo( v1.x + 10, v1.y );
@@ -6582,7 +6582,7 @@ THREE.CanvasRenderer = function ( parameters ) {
 				_context.closePath();
 				_context.strokeStyle = 'rgb(255,255,0)';
 				_context.stroke();
-				
+
 
 			} else if ( material instanceof THREE.ParticleCanvasMaterial ) {
 
@@ -8897,7 +8897,7 @@ THREE.ShaderLib = {
 					// "morphed += ( morphTarget7 - position ) * morphTargetInfluences[ 7 ];",
 					// "morphed += position;",
 
-					// "gl_Position = projectionMatrix * modelViewMatrix * vec4( morphed, 1.0 );",		
+					// "gl_Position = projectionMatrix * modelViewMatrix * vec4( morphed, 1.0 );",
 				// "#endif",
 
 			"}"
@@ -16921,7 +16921,7 @@ THREE.BufferGeometry.prototype = {
 /**
  * @author zz85 / http://www.lab4games.net/zz85/blog
  * Extensible curve object
- * 
+ *
  * Some common of Curve methods
  * .getPoint(t), getTangent(t)
  * .getPointAt(u), getTagentAt(u)
@@ -17163,7 +17163,7 @@ THREE.Curve.prototype.getTangent = function( t ) {
 
 	var pt1 = this.getPoint( t1 );
 	var pt2 = this.getPoint( t2 );
-	
+
 	var vec = pt1.clone().subSelf(pt2);
 	return vec.normalize();
 
@@ -17652,7 +17652,7 @@ THREE.CurvePath = function () {
 
 	this.curves = [];
 	this.bends = [];
-	
+
 	this.autoClose = false; // Automatically closes the path
 };
 
@@ -17677,11 +17677,11 @@ THREE.CurvePath.prototype.closePath = function() {
 	// Add a line curve if start and end of lines are not connected
 	var startPoint = this.curves[0].getPoint(0);
 	var endPoint = this.curves[this.curves.length-1].getPoint(1);
-	
+
 	if (!startPoint.equals(endPoint)) {
 		this.curves.push( new THREE.LineCurve(endPoint, startPoint) );
 	}
-	
+
 };
 
 // To get accurate point with reference to
@@ -20536,9 +20536,9 @@ THREE.TrackballCamera = function () {
 
 };
 /*
- *	@author zz85 / http://twitter.com/blurspline / http://www.lab4games.net/zz85/blog 
- * 
- *	A handy general perpose camera, for setting FOV, Lens Focal Length,  
+ *	@author zz85 / http://twitter.com/blurspline / http://www.lab4games.net/zz85/blog
+ *
+ *	A handy general perpose camera, for setting FOV, Lens Focal Length,
  *		and switching between perspective and orthographic views easily.
  *
  */
@@ -20549,24 +20549,24 @@ THREE.CombinedCamera = function ( width, height, fov, near, far, orthonear, orth
 	THREE.Camera.call( this );
 
 	this.fov = fov;
-	
+
 	this.left = -width / 2;
 	this.right = width / 2
 	this.top = height / 2;
 	this.bottom = -height / 2;
-	
+
 	// We could also handle the projectionMatrix internally, but just wanted to test nested camera objects
 	this.cameraO = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 	orthonear, orthofar );
 	this.cameraP = new THREE.PerspectiveCamera( fov, width/height, near, far );
 
 	this.zoom = 1;
-	
+
 	this.toPerspective();
-	
-	
+
+
 	var aspect = width/height;
-	
-	
+
+
 
 
 };
@@ -20581,7 +20581,7 @@ THREE.CombinedCamera.prototype.toPerspective = function () {
 	this.cameraP.fov =  this.fov / this.zoom ;
 	this.cameraP.updateProjectionMatrix();
 	this.projectionMatrix = this.cameraP.projectionMatrix;
-	
+
 	this.inPersepectiveMode = true;
 	this.inOrthographicMode = false;
 
@@ -20594,24 +20594,24 @@ THREE.CombinedCamera.prototype.toOrthographic = function () {
 	var aspect = this.cameraP.aspect;
 	var near = this.cameraP.near;
 	var far = this.cameraP.far;
-	
-	
+
+
 	// Just pretend we want the mid plane of the viewing frustum
-	var hyperfocus = ( near + far ) / 2; 
-	
+	var hyperfocus = ( near + far ) / 2;
+
 	var halfHeight = Math.tan( fov / 2 ) * hyperfocus;
 	var planeHeight = 2 * halfHeight;
 	var planeWidth = planeHeight * aspect;
 	var halfWidth = planeWidth / 2;
-	
+
 	halfHeight /= this.zoom;
 	halfWidth /= this.zoom;
-	
+
 	this.cameraO.left = -halfWidth;
 	this.cameraO.right = halfWidth;
 	this.cameraO.top = halfHeight;
 	this.cameraO.bottom = -halfHeight;
-	
+
 	// this.cameraO.left = -farHalfWidth;
 	// this.cameraO.right = farHalfWidth;
 	// this.cameraO.top = farHalfHeight;
@@ -20621,21 +20621,21 @@ THREE.CombinedCamera.prototype.toOrthographic = function () {
 	// this.cameraO.right = this.right / this.zoom;
 	// this.cameraO.top = this.top / this.zoom;
 	// this.cameraO.bottom = this.bottom / this.zoom;
-	
+
 	this.cameraO.updateProjectionMatrix();
 
 	this.near = this.cameraO.near;
 	this.far = this.cameraO.far;
 	this.projectionMatrix = this.cameraO.projectionMatrix;
-	
+
 	this.inPersepectiveMode = false;
 	this.inOrthographicMode = true;
 
 };
 
-THREE.CombinedCamera.prototype.setFov = function(fov) {	
+THREE.CombinedCamera.prototype.setFov = function(fov) {
 	this.fov = fov;
-	
+
 	if (this.inPersepectiveMode) {
 		this.toPerspective();
 	} else {
@@ -20664,13 +20664,13 @@ THREE.CombinedCamera.prototype.setLens = function(focalLength, framesize) {
 THREE.CombinedCamera.prototype.setZoom = function(zoom) {
 
 	this.zoom = zoom;
-	
+
 	if (this.inPersepectiveMode) {
 		this.toPerspective();
 	} else {
 		this.toOrthographic();
 	}
-	
+
 
 };
 
@@ -20678,7 +20678,7 @@ THREE.CombinedCamera.prototype.toFrontView = function() {
 	this.rotation.x = 0;
 	this.rotation.y = 0;
 	this.rotation.z = 0;
-	
+
 	//TODO: Better way to disable camera.lookAt()?
 	this.rotationAutoUpdate = false;
 };
@@ -20689,7 +20689,7 @@ THREE.CombinedCamera.prototype.toBackView = function() {
 	this.rotation.z = 0;
 	this.rotationAutoUpdate = false;
 };
-	
+
 THREE.CombinedCamera.prototype.toLeftView = function() {
 	this.rotation.x = 0;
 	this.rotation.y = - Math.PI / 2;
@@ -20891,11 +20891,11 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
 	this.update = function( delta ) {
 		var actualMoveSpeed = 0;
-		
+
 		if ( this.freeze ) {
-			
+
 			return;
-			
+
 		} else {
 
 			if ( this.heightSpeed ) {
@@ -22051,7 +22051,7 @@ THREE.TrackballControls = function ( object, domElement ) {
 			_this.rotateCamera();
 
 		}
-		
+
 		if ( !_this.noZoom ) {
 
 			_this.zoomCamera();
@@ -23414,8 +23414,8 @@ THREE.LatheGeometry.prototype = new THREE.Geometry();
 THREE.LatheGeometry.prototype.constructor = THREE.LatheGeometry;
 /**
  * Octahedrons have 8 sides. This octahedron supports subdivision.
- * 
- * Vertices have 'smooth' normals, 
+ *
+ * Vertices have 'smooth' normals,
  * to make a sharp edge choose a material that uses face normals instead.
  *
  * @author daniel.deady@knectar.com
@@ -23480,7 +23480,7 @@ THREE.OctahedronGeometry = function ( radius, detail ) {
 			that.faces.push( face );
 
 			var azi = azimuth( face.centroid );
-			that.faceVertexUvs[ 0 ].push( [ 
+			that.faceVertexUvs[ 0 ].push( [
 				correctUV( v1.uv, v1.position, azi ),
 				correctUV( v2.uv, v2.position, azi ),
 				correctUV( v3.uv, v3.position, azi )
@@ -23507,8 +23507,8 @@ THREE.OctahedronGeometry = function ( radius, detail ) {
 		var mid = midpoints[ v1.index ][ v2.index ];
 		if ( mid === undefined ) {
 			// generate mean point and project to surface with prepare()
-			midpoints[ v1.index ][ v2.index ] = midpoints[ v2.index ][ v1.index ] = mid = prepare( 
-				new THREE.Vector3().add( v1.position, v2.position ).divideScalar( 2 ) 
+			midpoints[ v1.index ][ v2.index ] = midpoints[ v2.index ][ v1.index ] = mid = prepare(
+				new THREE.Vector3().add( v1.position, v2.position ).divideScalar( 2 )
 			);
 		}
 		return mid;
@@ -23750,7 +23750,7 @@ THREE.SphereGeometry.prototype.constructor = THREE.SphereGeometry;
  *
  */
 /*	Usage Examples
-	
+
 	// TextGeometry wrapper
 
 	var text3d = new TextGeometry( text, options );
@@ -23760,7 +23760,7 @@ THREE.SphereGeometry.prototype.constructor = THREE.SphereGeometry;
 	var textPath = new THREE.TextPath( text, options );
 	var textShapes = textPath.toShapes();
 	var text3d = new ExtrudeGeometry( textShapes, options );
-	
+
 */
 
 
@@ -24636,16 +24636,16 @@ THREE.CameraHelper.__v = new THREE.Vector3();
 THREE.CameraHelper.__c = new THREE.Camera();
 
 /*
- *	@author zz85 / http://twitter.com/blurspline / http://www.lab4games.net/zz85/blog 
- * 
- *	Subdivision Geometry Modifier 
+ *	@author zz85 / http://twitter.com/blurspline / http://www.lab4games.net/zz85/blog
+ *
+ *	Subdivision Geometry Modifier
  *		using Catmull-Clark Subdivision Surfaces
  *		for creating smooth geometry meshes
  *
  *	Note: a modifier modifies vertices and faces of geometry,
  *		so use THREE.GeometryUtils.clone() if orignal geoemtry needs to be retained
- * 
- *	Readings: 
+ *
+ *	Readings:
  *		http://en.wikipedia.org/wiki/Catmull%E2%80%93Clark_subdivision_surface
  *		http://www.rorydriscoll.com/2008/08/01/catmull-clark-subdivision-the-basics/
  *		http://xrt.wikidot.com/blog:31
@@ -24654,19 +24654,19 @@ THREE.CameraHelper.__c = new THREE.Camera();
  *	Supports:
  *		Closed and Open geometries.
  *
- *	TODO: 
+ *	TODO:
  *		crease vertex and "semi-sharp" features
  *		selective subdivision
  */
 
 THREE.SubdivisionModifier = function( subdivisions ) {
-	
+
 	this.subdivisions = (subdivisions === undefined ) ? 1 : subdivisions;
-	
+
 	// Settings
 	this.useOldVertexColors = false;
 	this.supportUVs = true;
-	
+
 };
 
 //THREE.SubdivisionModifier.prototype = new THREE.Modifier();
@@ -24675,65 +24675,65 @@ THREE.SubdivisionModifier.prototype.constructor = THREE.SubdivisionModifier;
 
 // Applies the "modify" pattern
 THREE.SubdivisionModifier.prototype.modify = function ( geometry ) {
-	
+
 	var repeats = this.subdivisions;
-	
+
 	while ( repeats-- > 0 ) {
 		this.smooth( geometry );
 	}
-	
+
 };
 
 // Performs an iteration of Catmull-Clark Subdivision
 THREE.SubdivisionModifier.prototype.smooth = function ( oldGeometry ) {
-	
+
 	//console.log( 'running smooth' );
-	
+
 	// New set of vertices, faces and uvs
 	var newVertices = [], newFaces = [], newUVs = [];
-	
+
 	function v( x, y, z ) {
 		newVertices.push( new THREE.Vertex( new THREE.Vector3( x, y, z ) ) );
 	}
-	
+
 	var scope = this;
 
 	function f4( a, b, c, d, oldFace, orders ) {
-		
+
 		// TODO move vertex selection over here!
-		
+
 		var newFace = new THREE.Face4( a, b, c, d, null, oldFace.color, oldFace.material );
-		
+
 		if (scope.useOldVertexColors) {
-			
-			newFace.vertexColors = []; 
-			
+
+			newFace.vertexColors = [];
+
 			var color, tmpColor, order;
 			for (var i=0;i<4;i++) {
 				order = orders[i];
-				
+
 				color = new THREE.Color(),
 				color.setRGB(0,0,0);
-				
+
 				for (var j=0, jl=0; j<order.length;j++) {
 					tmpColor = oldFace.vertexColors[order[j]-1];
 					color.r += tmpColor.r;
 					color.g += tmpColor.g;
 					color.b += tmpColor.b;
 				}
-				
+
 				color.r /= order.length;
 				color.g /= order.length;
 				color.b /= order.length;
-				
+
 				newFace.vertexColors[i] = color;
-				
+
 			}
-			
+
 		}
-		
+
 		newFaces.push( newFace );
-		
+
 		if (!scope.supportUVs || uvForVertices.length!=0) {
 			newUVs.push( [
 				uvForVertices[a],
@@ -24741,16 +24741,16 @@ THREE.SubdivisionModifier.prototype.smooth = function ( oldGeometry ) {
 				uvForVertices[c],
 				uvForVertices[d]
 			] );
-			
+
 		}
 	}
-	
+
 	function edge_hash( a, b ) {
 
 		return Math.min( a, b ) + "_" + Math.max( a, b );
 
 	};
-	
+
 	function computeEdgeFaces( geometry ) {
 
 		function addToMap( map, hash, i ) {
@@ -24758,9 +24758,9 @@ THREE.SubdivisionModifier.prototype.smooth = function ( oldGeometry ) {
 			if ( map[ hash ] === undefined ) {
 
 				map[ hash ] = [];
-				
-			} 
-			
+
+			}
+
 			map[ hash ].push( i );
 
 		};
@@ -24798,7 +24798,7 @@ THREE.SubdivisionModifier.prototype.smooth = function ( oldGeometry ) {
 
 				hash = edge_hash( face.c, face.d );
 				addToMap( vfMap, hash, i );
-				
+
 				hash = edge_hash( face.d, face.a );
 				addToMap( vfMap, hash, i );
 
@@ -24807,144 +24807,144 @@ THREE.SubdivisionModifier.prototype.smooth = function ( oldGeometry ) {
 		}
 
 		// extract faces
-		
+
 		// var edges = [];
-		// 
+		//
 		// var numOfEdges = 0;
 		// for (i in vfMap) {
 		// 	numOfEdges++;
-		// 	
+		//
 		// 	edge = vfMap[i];
 		// 	edges.push(edge);
-		// 	
+		//
 		// }
-		
+
 		//console.log('vfMap', vfMap, 'geometry.edges',geometry.edges, 'numOfEdges', numOfEdges);
 
 		return vfMap;
 
 	};
-	
+
 	var originalPoints = oldGeometry.vertices;
 	var originalFaces = oldGeometry.faces;
-	
+
 	var newPoints = originalPoints.concat(); // Vertices
-		
+
 	var facePoints = [], edgePoints = {};
-	
+
 	var sharpEdges = {}, sharpVertices = [], sharpFaces = [];
-	
+
 	var uvForVertices = [];
-	
+
 	// Step 1
 	//	For each face, add a face point
 	//	Set each face point to be the centroid of all original points for the respective face.
-	
+
 	var i, il, j, jl, face;
-	
+
 	// For Uvs
 	var uvs = oldGeometry.faceVertexUvs[0];
 	var abcd = 'abcd', vertice;
-	
+
 	for (i=0, il = uvs.length; i<il; i++ ) {
 		for (j=0,jl=uvs[i].length;j<jl;j++) {
 			vertice = originalFaces[i][abcd.charAt(j)];
-			
+
 			if (!uvForVertices[vertice]) {
 				uvForVertices[vertice] = uvs[i][j];
 			} else {
 				//console.log('dup', 	uvForVertices[vertice]);
 			}
-			
-			
+
+
 		}
 	}
-			
+
 	var avgUv ;
 	for (i=0, il = originalFaces.length; i<il ;i++) {
 		face = originalFaces[i];
 		facePoints.push(face.centroid);
 		newPoints.push( new THREE.Vertex(face.centroid) );
-		
-		
+
+
 		if (!scope.supportUVs || uvForVertices.length==0) continue;
-		
+
 		// Prepare subdivided uv
-		
+
 		avgUv = new THREE.UV();
-		
+
 		if ( face instanceof THREE.Face3 ) {
 			avgUv.u = uvForVertices[face.a].u + uvForVertices[face.b].u + uvForVertices[face.c].u;
 			avgUv.v = uvForVertices[face.a].v + uvForVertices[face.b].v + uvForVertices[face.c].v;
 			avgUv.u /= 3;
 			avgUv.v /= 3;
-			
+
 		} else if ( face instanceof THREE.Face4 ) {
 			avgUv.u = uvForVertices[face.a].u + uvForVertices[face.b].u + uvForVertices[face.c].u + uvForVertices[face.d].u;
 			avgUv.v = uvForVertices[face.a].v + uvForVertices[face.b].v + uvForVertices[face.c].v + uvForVertices[face.d].v;
 			avgUv.u /= 4;
 			avgUv.v /= 4;
 		}
-	
+
 		uvForVertices.push(avgUv);
 	}
 
 	// Step 2
 	//	For each edge, add an edge point.
 	//	Set each edge point to be the average of the two neighbouring face points and its two original endpoints.
-	
+
 	var vfMap = computeEdgeFaces ( oldGeometry );
 	var edge, faceIndexA, faceIndexB, avg;
-	
+
 	//console.log('vfMap', vfMap);
 
 	var edgeCount = 0;
 	var originalVerticesLength = originalPoints.length;
 	var edgeVertex, edgeVertexA, edgeVertexB;
-	
+
 	////
-	
+
 	var vertexEdgeMap = {};
 	var vertexFaceMap = {};
-	
+
 	var addVertexEdgeMap = function(vertex, edge) {
 		if (vertexEdgeMap[vertex]===undefined) {
 			vertexEdgeMap[vertex] = [];
 		}
-		
+
 		vertexEdgeMap[vertex].push(edge);
 	};
-	
+
 	var addVertexFaceMap = function(vertex, face, edge) {
 		if (vertexFaceMap[vertex]===undefined) {
 			vertexFaceMap[vertex] = {};
 		}
-		
+
 		//vertexFaceMap[vertex][face] = edge;
 		vertexFaceMap[vertex][face] = null;
 	};
-	
+
 	// Prepares vertexEdgeMap and vertexFaceMap
 	for (i in vfMap) { // This is for every edge
 		edge = vfMap[i];
-		
+
 		edgeVertex = i.split('_');
 		edgeVertexA = edgeVertex[0];
 		edgeVertexB = edgeVertex[1];
-		
+
 		// Maps an edgeVertex to connecting edges
 		addVertexEdgeMap(edgeVertexA, [edgeVertexA, edgeVertexB] );
 		addVertexEdgeMap(edgeVertexB, [edgeVertexA, edgeVertexB] );
-		
-		
+
+
 		// faceIndexA = edge[0]; // face index a
 		// faceIndexB = edge[1]; // face index b
-		// 
+		//
 		// // Add connecting faces for edge
 		// addVertexFaceMap(edgeVertexA, faceIndexA);
 		// addVertexFaceMap(edgeVertexB, faceIndexA);
-		// 
-		// 
+		//
+		//
 		// if (faceIndexB) {
 		// 	addVertexFaceMap(edgeVertexA, faceIndexB);
 		// 	addVertexFaceMap(edgeVertexB, faceIndexB);
@@ -24952,98 +24952,98 @@ THREE.SubdivisionModifier.prototype.smooth = function ( oldGeometry ) {
 		// 	addVertexFaceMap(edgeVertexA, faceIndexA);
 		// 	addVertexFaceMap(edgeVertexB, faceIndexA);
 		// }
-		
+
 		for (j=0,jl=edge.length;j<jl;j++) {
 			face = edge[j];
-			
+
 			addVertexFaceMap(edgeVertexA, face, i);
 			addVertexFaceMap(edgeVertexB, face, i);
 		}
-		
+
 		if (edge.length < 2) {
 			// edge is "sharp";
 			sharpEdges[i] = true;
 			sharpVertices[edgeVertexA] = true;
 			sharpVertices[edgeVertexB] = true;
-			
+
 		}
-		
+
 	}
-	
-	
-	
+
+
+
 	//console.log('vertexEdgeMap',vertexEdgeMap, 'vertexFaceMap', vertexFaceMap);
-	
-	
+
+
 	for (i in vfMap) {
 		edge = vfMap[i];
-		
+
 		faceIndexA = edge[0]; // face index a
 		faceIndexB = edge[1]; // face index b
-		
+
 		edgeVertex = i.split('_');
 		edgeVertexA = edgeVertex[0];
 		edgeVertexB = edgeVertex[1];
-		
-		
+
+
 		avg = new THREE.Vector3();
-		
+
 		//console.log(i, faceIndexB,facePoints[faceIndexB]);
-		
+
 		if (sharpEdges[i]) {
 			//console.log('warning, ', i, 'edge has only 1 connecting face', edge);
-			
+
 			// For a sharp edge, average the edge end points.
 			avg.addSelf(originalPoints[edgeVertexA].position);
 			avg.addSelf(originalPoints[edgeVertexB].position);
-			
+
 			avg.multiplyScalar(0.5);
-			
+
 			sharpVertices[newPoints.length] = true;
-			
+
 		} else {
-		
+
 			avg.addSelf(facePoints[faceIndexA]);
 			avg.addSelf(facePoints[faceIndexB]);
-		
+
 			avg.addSelf(originalPoints[edgeVertexA].position);
 			avg.addSelf(originalPoints[edgeVertexB].position);
-		
+
 			avg.multiplyScalar(0.25);
-		
+
 		}
-		
+
 		edgePoints[i] = originalVerticesLength + originalFaces.length + edgeCount;
 		//console.log(edgePoints[i], newPoints.length);
-		
+
 		newPoints.push( new THREE.Vertex(avg) );
-	
+
 		edgeCount ++;
-		
+
 		if (!scope.supportUVs || uvForVertices.length==0) continue;
-		
+
 		// Prepare subdivided uv
-		
+
 		avgUv = new THREE.UV();
-		
+
 		avgUv.u = uvForVertices[edgeVertexA].u + uvForVertices[edgeVertexB].u;
 		avgUv.v = uvForVertices[edgeVertexA].v + uvForVertices[edgeVertexB].v;
 		avgUv.u /= 2;
 		avgUv.v /= 2;
-	
+
 		uvForVertices.push(avgUv);
-		
+
 	}
-	
+
 	// Step 3
-	//	For each face point, add an edge for every edge of the face, 
+	//	For each face point, add an edge for every edge of the face,
 	//	connecting the face point to each edge point for the face.
-	
-	
+
+
 	var facePt, currentVerticeIndex;
-	
+
 	var hashAB, hashBC, hashCD, hashDA, hashCA;
-	
+
 	var abc123 = ['123', '12', '2', '23'];
 	var bca123 = ['123', '23', '3', '31'];
 	var cab123 = ['123', '31', '1', '12'];
@@ -25051,81 +25051,81 @@ THREE.SubdivisionModifier.prototype.smooth = function ( oldGeometry ) {
 	var bcd1234 = ['1234', '23', '3', '34'];
 	var cda1234 = ['1234', '34', '4', '41'];
 	var dab1234 = ['1234', '41', '1', '12'];
-	
-	
+
+
 	for (i=0, il = facePoints.length; i<il ;i++) { // for every face
 		facePt = facePoints[i];
 		face = originalFaces[i];
 		currentVerticeIndex = originalVerticesLength+ i;
-		
+
 		if ( face instanceof THREE.Face3 ) {
-			
+
 			// create 3 face4s
-			
+
 			hashAB = edge_hash( face.a, face.b );
 			hashBC = edge_hash( face.b, face.c );
 			hashCA = edge_hash( face.c, face.a );
-			
+
 			f4( currentVerticeIndex, edgePoints[hashAB], face.b, edgePoints[hashBC], face, abc123 );
 			f4( currentVerticeIndex, edgePoints[hashBC], face.c, edgePoints[hashCA], face, bca123 );
 			f4( currentVerticeIndex, edgePoints[hashCA], face.a, edgePoints[hashAB], face, cab123 );
-			
+
 		} else if ( face instanceof THREE.Face4 ) {
 			// create 4 face4s
-			
+
 			hashAB = edge_hash( face.a, face.b );
 			hashBC = edge_hash( face.b, face.c );
 			hashCD = edge_hash( face.c, face.d );
 			hashDA = edge_hash( face.d, face.a );
-			
+
 			f4( currentVerticeIndex, edgePoints[hashAB], face.b, edgePoints[hashBC], face, abc1234 );
 			f4( currentVerticeIndex, edgePoints[hashBC], face.c, edgePoints[hashCD], face, bcd1234 );
 			f4( currentVerticeIndex, edgePoints[hashCD], face.d, edgePoints[hashDA], face, cda1234 );
 			f4( currentVerticeIndex, edgePoints[hashDA], face.a, edgePoints[hashAB], face, dab1234  );
 
-				
+
 		} else {
 			console.log('face should be a face!', face);
 		}
 	}
-	
+
 	newVertices = newPoints;
-	
+
 	// console.log('original ', oldGeometry.vertices.length, oldGeometry.faces.length );
 	// console.log('new points', newPoints.length, 'faces', newFaces.length );
-	
+
 	// Step 4
-	
-	//	For each original point P, 
-	//		take the average F of all n face points for faces touching P, 
-	//		and take the average R of all n edge midpoints for edges touching P, 
-	//		where each edge midpoint is the average of its two endpoint vertices. 
+
+	//	For each original point P,
+	//		take the average F of all n face points for faces touching P,
+	//		and take the average R of all n edge midpoints for edges touching P,
+	//		where each edge midpoint is the average of its two endpoint vertices.
 	//	Move each original point to the point
 
-	
+
 	var F = new THREE.Vector3();
 	var R = new THREE.Vector3();
 
 	var n;
 	for (i=0, il = originalPoints.length; i<il; i++) {
 		// (F + 2R + (n-3)P) / n
-		
+
 		if (vertexEdgeMap[i]===undefined) continue;
-		
+
 		F.set(0,0,0);
 		R.set(0,0,0);
 		var newPos =  new THREE.Vector3(0,0,0);
-		
+
 		var f =0;
 		for (j in vertexFaceMap[i]) {
 			F.addSelf(facePoints[j]);
 			f++;
 		}
-		
+
 		var sharpEdgeCount = 0;
-		
+
 		n = vertexEdgeMap[i].length;
-		
+
 		for (j=0;j<n;j++) {
 			if (
 				sharpEdges[
@@ -25134,7 +25134,7 @@ THREE.SubdivisionModifier.prototype.smooth = function ( oldGeometry ) {
 					sharpEdgeCount++;
 				}
 		}
-		
+
 		if ( sharpEdgeCount==2 ) {
 			continue;
 			// Do not move vertex if there's 2 connecting sharp edges.
@@ -25145,11 +25145,11 @@ THREE.SubdivisionModifier.prototype.smooth = function ( oldGeometry ) {
 			// TODO
 		}
 		*/
-		
+
 		F.divideScalar(f);
-		
-		
-		
+
+
+
 		for (j=0; j<n;j++) {
 			edge = vertexEdgeMap[i][j];
 			var midPt = originalPoints[edge[0]].position.clone().addSelf(originalPoints[edge[1]].position).divideScalar(2);
@@ -25157,33 +25157,33 @@ THREE.SubdivisionModifier.prototype.smooth = function ( oldGeometry ) {
 			// R.addSelf(originalPoints[edge[0]].position);
 			// R.addSelf(originalPoints[edge[1]].position);
 		}
-		
+
 		R.divideScalar(n)
-		
+
 		newPos.addSelf(originalPoints[i].position);
 		newPos.multiplyScalar(n - 3);
-		
+
 		newPos.addSelf(F);
 		newPos.addSelf(R.multiplyScalar(2));
 		newPos.divideScalar(n);
-		
+
 		newVertices[i].position = newPos;
-		
-		
+
+
 	}
-	
+
 	var newGeometry = oldGeometry; // Let's pretend the old geometry is now new :P
-	
+
 	newGeometry.vertices = newVertices;
 	newGeometry.faces = newFaces;
 	newGeometry.faceVertexUvs[ 0 ] = newUVs;
-	
+
 	delete newGeometry.__tmpVertices; // makes __tmpVertices undefined :P
-	
+
 	newGeometry.computeCentroids();
 	newGeometry.computeFaceNormals();
 	newGeometry.computeVertexNormals();
-	
+
 };
 /**
  * @author alteredq / http://alteredqualia.com/
@@ -31246,7 +31246,7 @@ THREE.SceneLoader.prototype.createScene = function ( json, callbackFinished, url
 			camera = new THREE.OrthographicCamera( c.left, c.right, c.top, c.bottom, c.near, c.far );
 
 		}
-		
+
 		p = c.position;
 		t = c.target;
 		u = c.up;
@@ -31254,7 +31254,7 @@ THREE.SceneLoader.prototype.createScene = function ( json, callbackFinished, url
 		camera.position.set( p[0], p[1], p[2] );
 		camera.target = new THREE.Vector3( t[0], t[1], t[2] );
 		if ( u ) camera.up.set( u[0], u[1], u[2] );
-		
+
 		result.cameras[ dc ] = camera;
 
 	}

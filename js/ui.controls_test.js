@@ -60,7 +60,7 @@ var d3Graphs = {
         $("#hudHeader .countryTextInput").focus(d3Graphs.countryFocus);
         $(document).on("click",".ui-autocomplete li",d3Graphs.menuItemClick);
         $(window).resize(d3Graphs.windowResizeCB);
-        
+
     },
     dragHandle:function() {
         if(!d3Graphs.histogramOpen) {
@@ -107,14 +107,14 @@ var d3Graphs = {
             d3Graphs.updateViz();
         }
     },
-    
+
     updateViz:function() {
         var yearOffset = $("#handle").css('left');
         yearOffset = yearOffset.substr(0,yearOffset.length-2);
         yearOffset -= d3Graphs.handleLeftOffset;
         yearOffset /= d3Graphs.handleInterval;
         var year = yearOffset + 1992;
-        
+
         var country = $("#hudHeader .countryTextInput").val().toUpperCase();
         if(typeof countryData[country] == 'undefined') {
             return;
@@ -161,7 +161,7 @@ var d3Graphs = {
         }
         d3Graphs.updateViz();
     },
-    importExportBtnClick:function() { 
+    importExportBtnClick:function() {
         var check = $(this).find('.check');
         if(check.hasClass('inactive')) {
             check.removeClass('inactive');
@@ -184,11 +184,11 @@ var d3Graphs = {
     },
     line: d3.svg.line()
         // assign the X function to plot our line as we wish
-    .x(function(d,i) { 
-        return d3Graphs.histogramXScale(i) + d3Graphs.histogramLeftPadding; 
+    .x(function(d,i) {
+        return d3Graphs.histogramXScale(i) + d3Graphs.histogramLeftPadding;
      })
-    .y(function(d) { 
-        return d3Graphs.histogramYScale(d) + d3Graphs.histogramVertPadding; 
+    .y(function(d) {
+        return d3Graphs.histogramYScale(d) + d3Graphs.histogramVertPadding;
     }),
     setHistogramData:function() {
         var importArray = [0];
@@ -204,14 +204,14 @@ var d3Graphs = {
             var exportCur = historical[i].exports;
             var exportDiff = (exportCur - exportPrev) / exportPrev * 100;
             importArray.push(importDiff);
-            exportArray.push(exportDiff); 
+            exportArray.push(exportDiff);
             if(Math.abs(importDiff) > absMax) {
                 absMax = Math.abs(importDiff);
             }
             if(Math.abs(exportDiff) > absMax) {
                 absMax = Math.abs(exportDiff);
             }
-            
+
         }
         this.histogramImportArray = importArray;
         this.histogramExportArray = exportArray;
@@ -223,10 +223,10 @@ var d3Graphs = {
             this.histogramSVG.attr('id','histogram').attr('width',this.histogramWidth).attr('height',this.histogramHeight);
         }
         this.setHistogramData();
-        
+
         this.histogramYScale = d3.scale.linear().domain([this.histogramAbsMax,-this.histogramAbsMax]).range([0, this.histogramHeight - this.histogramVertPadding*2]);
         this.histogramXScale = d3.scale.linear().domain([0,this.histogramExportArray.length-1]).range([0, this.histogramWidth - this.histogramLeftPadding - this.histogramRightPadding]);
-        
+
         var tickData = this.histogramYScale.ticks(4);
         var containsZero = false;
         var numTicks = tickData.length;
@@ -289,29 +289,29 @@ var d3Graphs = {
             return d3Graphs.histogramWidth - d3Graphs.histogramRightPadding + (d == '+' ? plusOffset : 0)+2;
         }).attr('y',function(d,i) {
             var yOffset = 10;
-            return d3Graphs.histogramYScale(0) + d3Graphs.histogramVertPadding +  6 + (d == '+' ? -yOffset : yOffset); 
+            return d3Graphs.histogramYScale(0) + d3Graphs.histogramVertPadding +  6 + (d == '+' ? -yOffset : yOffset);
         }).text(String);
         //lines
         var importsVisible = $("#importExportBtns .imports .check").not(".inactive").length != 0;
         var exportsVisible = $("#importExportBtns .exports .check").not(".inactive").length != 0;
         $("#history .labels .exports").css('display', exportsVisible ? 'block' : 'none');
         $("#history .labels .imports").css('display', importsVisible ? 'block' : 'none');
-        
-    
+
+
         var importLine = this.histogramSVG.selectAll("path.import").data([1]);
         importLine.enter().append('svg:path').attr('class','import');
         importLine.attr('d',this.line(this.histogramImportArray)).attr('visibility',importsVisible ? 'visible' : 'hidden');
         var exportLine = this.histogramSVG.selectAll("path.export").data([1]);
         exportLine.enter().append('svg:path').attr('class','export');
         exportLine.attr('d',this.line(this.histogramExportArray)).attr('visibility', exportsVisible ? 'visible' : 'hidden');
-        
+
         //active year labels
         var yearOffset = $("#handle").css('left');
         yearOffset = yearOffset.substr(0,yearOffset.length-2);
         yearOffset -= d3Graphs.handleLeftOffset;
         yearOffset /= d3Graphs.handleInterval;
         var maxVal = this.histogramImportArray[yearOffset] > this.histogramExportArray[yearOffset] ? this.histogramImportArray[yearOffset] : this.histogramExportArray[yearOffset];
-        
+
         var activeYearData = [{x:yearOffset, y: this.histogramImportArray[yearOffset], max: maxVal}, {x: yearOffset, y: this.histogramExportArray[yearOffset], max: maxVal}];
         var yearDots = this.histogramSVG.selectAll("ellipse.year").data(activeYearData);
         var yearDotLabels = this.histogramSVG.selectAll("text.yearLabel").data(activeYearData);
@@ -332,7 +332,7 @@ var d3Graphs = {
         var yearDotLabels = this.histogramSVG.selectAll("text.yearLabel").data(activeYearData);
         var importsVisible = $("#importExportBtns .imports .check").not(".inactive").length != 0;
         var exportsVisible = $("#importExportBtns .exports .check").not(".inactive").length != 0;
-        
+
         yearDots.attr('cx', function(d) { return d3Graphs.histogramLeftPadding + d3Graphs.histogramXScale(d.x); })
             .attr('cy',function(d) { return d3Graphs.histogramVertPadding + d3Graphs.histogramYScale(d.y); } )
             .attr('visibility', function(d) {
@@ -346,7 +346,7 @@ var d3Graphs = {
         .attr('y',function(d) {
             var yVal = d3Graphs.histogramYScale(d.y) + d3Graphs.histogramVertPadding;
             if(d.y == maxVal) {
-                yVal -= 7;  
+                yVal -= 7;
             } else {
                 yVal += 19;
             }
@@ -357,7 +357,7 @@ var d3Graphs = {
                 yVal -= 26;
             }
             return yVal;
-            
+
         }).text(function(d) {
             var numlbl = Math.round(d.y*10)/10;
             var lbl = "";
@@ -376,7 +376,7 @@ var d3Graphs = {
         });
     },
     drawBarGraph: function() {
-        
+
         this.barGraphSVG.attr('id','barGraph').attr('width',d3Graphs.barGraphWidth).attr('height',d3Graphs.barGraphHeight);
         var importArray = [];
         var exportArray = [];
@@ -394,7 +394,7 @@ var d3Graphs = {
         importRects.enter().append('rect').attr('class', function(d) {
             return 'import '+d.type;
         }).attr('x',midX - this.barWidth).attr('width',this.barWidth);
-        
+
         importRects.attr('y',function(d) {
             var value = d3Graphs.barGraphHeight - d3Graphs.barGraphBottomPadding - d3Graphs.cumImportY - yScale(d.amount) ;
             d3Graphs.cumImportY += yScale(d.amount);
@@ -404,7 +404,7 @@ var d3Graphs = {
         exportRects.enter().append('rect').attr('class',function(d) {
             return 'export '+ d.type;
         }).attr('x',midX + 10).attr('width',this.barWidth);
-        
+
         exportRects.attr('y',function(d) {
             var value = d3Graphs.barGraphHeight - d3Graphs.barGraphBottomPadding - d3Graphs.cumExportY - yScale(d.amount);
             d3Graphs.cumExportY += yScale(d.amount);
@@ -421,7 +421,7 @@ var d3Graphs = {
         this.previousExportLabelTranslateY = 0;
         var paddingFromBottomOfGraph = 10;
         var heightPerLabel = 25;
-        importLabels.attr('transform',function(d) { 
+        importLabels.attr('transform',function(d) {
             var translate = 'translate('+(d3Graphs.barGraphWidth / 2 - 25)+",";
             var value = d3Graphs.barGraphHeight - d3Graphs.barGraphBottomPadding - d3Graphs.cumImportLblY - yScale(d.amount)/2;
             d3Graphs.cumImportLblY += yScale(d.amount);
@@ -433,7 +433,7 @@ var d3Graphs = {
                 d3Graphs.cumImportLblY += heightPerLabel;
             }*/
             translate += value+")";
-            
+
             this.previousImportLabelTranslateY = value;
             return translate;
         }).attr('display',function(d) {
@@ -451,7 +451,7 @@ var d3Graphs = {
         exportLabels.enter().append("g").attr('class',function(d) {
             return 'exportLabel '+d.type;
         })
-        exportLabels.attr('transform',function(d) { 
+        exportLabels.attr('transform',function(d) {
             var translate = 'translate('+(d3Graphs.barGraphWidth / 2 + 35)+",";
             var value = d3Graphs.barGraphHeight - d3Graphs.barGraphBottomPadding - d3Graphs.cumExportLblY - yScale(d.amount)/2;
             d3Graphs.cumExportLblY += yScale(d.amount);
@@ -476,24 +476,24 @@ var d3Graphs = {
         exportLabels.append('text').text(function(d) {
             return abbreviateNumber(d.amount);
         });
-        
+
         var importTotalLabel = this.barGraphSVG.selectAll('text.totalLabel').data([1]);
         importTotalLabel.enter().append('text').attr('x',midX).attr('text-anchor','end')
             .attr('class','totalLabel').attr('y',this.barGraphHeight- this.barGraphBottomPadding + 25);
-        
+
         importTotalLabel.text(abbreviateNumber(importTotal));
-        
+
         var exportTotalLabel = this.barGraphSVG.selectAll('text.totalLabel.totalLabel2').data([1]);
         exportTotalLabel.enter().append('text').attr('x',midX+10).attr('class','totalLabel totalLabel2').attr('y', this.barGraphHeight - this.barGraphBottomPadding+25);
         exportTotalLabel.text(abbreviateNumber(exportTotal));
-        
+
         //Import label at bottom
         var importLabel = this.barGraphSVG.selectAll('text.importLabel').data([1]).enter().append('text').attr('x',midX).attr('text-anchor','end').text('IMPORTS')
             .attr('class','importLabel').attr('y', this.barGraphHeight - this.barGraphBottomPadding + 45);
         //Export label at bottom
         var exportLabel = this.barGraphSVG.selectAll('text.exportLabel').data([1]).enter().append('text').attr('x',midX+10).text('EXPORTS')
             .attr('class','exportLabel').attr('y', this.barGraphHeight - this.barGraphBottomPadding + 45);
-        
+
     },
     dragHandleStart: function(event) {
         console.log('start');
@@ -512,7 +512,7 @@ return formated; //should show 57B for 57 Billion
 
 */
 function abbreviateNumber(value) {
-    
+
     var newValue = value;
     if (value >= 1000) {
         var suffixes = ["", "K", "M", "B","T"];

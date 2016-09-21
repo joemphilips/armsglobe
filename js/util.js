@@ -14,11 +14,11 @@ monthNames[7] = "August";
 monthNames[8] = "September";
 monthNames[9] = "October";
 monthNames[10] = "November";
-monthNames[11] = "December";			
+monthNames[11] = "December";
 
 function toMonthName( monthNumber ){
 	return monthNames[monthNumber];
-}	
+}
 
 function componentToHex(c) {
 	var hex = c.toString(16);
@@ -78,13 +78,13 @@ function screenXY(vec3){
 	result.x = Math.round( vector.x * (windowWidth/2) ) + windowWidth/2;
 	result.y = Math.round( (0-vector.y) * (window.innerHeight/2) ) + window.innerHeight/2;
 	return result;
-}	
+}
 
 function buildHexColumnGeo(rad, height){
 	var points = [];
 	var ang = 0;
 	var sixth = 2*Math.PI / 6;
-	for(var i=0; i<7; i++){					
+	for(var i=0; i<7; i++){
 		var x = Math.cos(ang) * rad;
 		var y = -Math.sin(ang) * rad;
 		points.push( new THREE.Vector2(x,y) );
@@ -99,7 +99,7 @@ function buildHexColumnGeo(rad, height){
 		bevelEnabled:  	false,
 	};
 	var extrudedGeo = new THREE.ExtrudeGeometry(shape, options);
-	return extrudedGeo;	    	
+	return extrudedGeo;
 }
 
 function map(v, i1, i2, o1, o2) {
@@ -116,9 +116,9 @@ function roundNumber(num, dec) {
 }
 
 function save(data, filename, mime) {
-    
+
     window.webkitRequestFileSystem(window.TEMPORARY, 1024 * 1024, initRecord, errorHandler("Error getting file system"));
-    
+
     function initRecord(fs) {
       var create = function() {
         fs.root.getFile("data.tar", {create: true}, function(fileEntry) {
